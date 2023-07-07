@@ -1,5 +1,4 @@
 import React from "react"
-import { useForm, SubmitHandler } from "react-hook-form"
 import { CheckIcon } from "@heroicons/react/outline"
 import Subscribe from "../Subscribe"
 
@@ -18,35 +17,7 @@ const features = [
   },
 ]
 
-type Inputs = {
-  email: string
-}
-
 export default function HomeHero() {
-  const {
-    register,
-    handleSubmit,
-    formState,
-    formState: { errors },
-  } = useForm<Inputs>()
-
-  const [isSubmitted, setIsSubmitted] = React.useState("")
-
-  const onSubmit: SubmitHandler<Inputs> = async (data, event) => {
-    event.target.reset()
-
-    const subscribe = await fetch("/api/subscribe", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    const response = await subscribe.json()
-
-    setIsSubmitted(response.message)
-  }
-
   return (
     <div className="">
       <div className="relative overflow-hidden">
